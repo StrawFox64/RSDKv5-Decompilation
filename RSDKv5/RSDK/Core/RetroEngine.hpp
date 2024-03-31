@@ -91,6 +91,7 @@ enum GameRegions {
 #define RETRO_iOS     (6)
 #define RETRO_ANDROID (7)
 #define RETRO_UWP     (8)
+#define RETRO_PS3     (9)
 
 // ============================
 // PLATFORMS (used mostly in legacy but could come in handy here)
@@ -142,6 +143,9 @@ enum GameRegions {
 #elif defined __linux__
 #define RETRO_PLATFORM   (RETRO_LINUX)
 #define RETRO_DEVICETYPE (RETRO_STANDARD)
+#elif defined __PS3__
+#define RETRO_PLATFORM   (RETRO_PS3)
+#define RETRO_DEVICETYPE (RETRO_STANDARD)
 #else
 #define RETRO_PLATFORM   (RETRO_WIN)
 #define RETRO_DEVICETYPE (RETRO_STANDARD)
@@ -156,6 +160,15 @@ enum GameRegions {
 #endif
 
 #define SCREEN_CENTERY (SCREEN_YSIZE / 2)
+
+// ============================
+// Log file path
+// ============================
+#ifndef BASE_PATH
+#if RETRO_PLATFORM == RETRO_PS3
+#define BASE_PATH "/dev_usb000/"
+#endif
+#endif
 
 // ============================
 // RENDER DEVICE BACKENDS
@@ -401,7 +414,7 @@ enum GameRegions {
 #error RSDK_USE_OGL must be defined.
 #endif
 
-#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_iOS
+#elif RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_iOS || RETRO_PLATFORM == RETRO_PS3
 
 #undef RETRO_RENDERDEVICE_SDL2
 #define RETRO_RENDERDEVICE_SDL2 (1)
@@ -524,8 +537,8 @@ extern "C" {
 #endif
 
 #if RETRO_RENDERDEVICE_SDL2 || RETRO_INPUTDEVICE_SDL2 || RETRO_AUDIODEVICE_SDL2
-#if RETRO_PLATFORM == RETRO_OSX
-// yeah, I dunno how you're meant to do the below with macOS frameworks so leaving this as is for rn :P
+#if RETRO_PLATFORM == RETRO_OSX || RETRO_PLATFORM == RETRO_PS3
+// yeah, I dunno how you're meant to do the below with macOS/PlayStation 3 frameworks so leaving this as is for rn :P
 #include <SDL2/SDL.h>
 #else
 // This is the way of including SDL that is recommended by the devs themselves:
