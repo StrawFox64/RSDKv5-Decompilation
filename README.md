@@ -1,3 +1,28 @@
+# About the project
+
+* This fork over the port for playstation 3 system
+* This port is still in WIP (work in progress)
+
+# Recurring problems
+* The sound after a few stages stops playing (just the music (it is possible to fix this by closing and opening the game)).
+* Opening xmb after a few minutes of play. Makes it charge infinitely (but it is still possible to turn off the console by holding the PS button (Do not use the "Quit Game" option as it will load infinitely)).
+* Save states unavailable (Saves are available more if you delete the game, you will also be deleting your save).
+
+# Goals
+
+* ~~Make the data.rsdk files works.~~ (Done)
+* Fix the sound. (Partially fixed)
+* ~~Fix performance.~~ (Done)
+* ~~Make the game not crash when exiting.~~ (Done)
+* ~~Improve control input.~~ (Done)
+* Two player support with controller.
+* Make saves stay on hdd.
+* anything else?
+
+# How to start
+Read [Here](https://github.com/StrawFox64/Sonic-Mania-Decompilation/blob/master.new/BUILDING.md).
+
+# Original description
 ![header](header.png?raw=true)
 
 A complete decompilation of Retro Engine v5 and v5Ultimate.
