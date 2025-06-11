@@ -97,9 +97,13 @@ static const char *openModes[3] = { "rb", "wb", "rb+" };
 
 inline bool32 CheckBigEndian()
 {
+#if RETRO_PLATFORM == RETRO_PS3
+	return true;
+#else
     uint32 x = 1;
     uint8 *c = (uint8 *)&x;
     return ((int32)*c) == 0;
+#endif
 }
 
 inline void InitFileInfo(FileInfo *info)

@@ -151,11 +151,15 @@ void DummyLeaderboards::TrackScore(LeaderboardID *leaderboard, int32 score, void
     if (!leaderboard)
         return;
 
+	// Making this denial because the toolchain does not support using C++11.
+	// Because Newlib is too old to support C++11 it is a definition made in RetroEngine.hpp
+#if RETRO_PLATFORM != RETRO_PS3
     std::string str = __FILE__;
     str += ": TrackScore() # TrackScore ";
     str += std::to_string(score);
     str += " \r\n";
     PrintLog(PRINT_NORMAL, str.c_str());
+#endif
 
     DummyLeaderboardCallback *cb = callbackList.Append();
     cb->type                     = 2;

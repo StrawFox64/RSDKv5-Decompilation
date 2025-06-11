@@ -38,7 +38,7 @@ bool RenderDevice::Init()
 
     videoSettings.windowWidth = ((float)SCREEN_YSIZE * h / w);
 
-#elif RETRO_PLATFORM == RETRO_SWITCH
+#elif RETRO_PLATFORM == RETRO_SWITCH || RETRO_PLATFORM == RETRO_PS3
     videoSettings.windowed     = false;
     videoSettings.windowWidth  = 1920;
     videoSettings.windowHeight = 1080;
@@ -108,8 +108,13 @@ void RenderDevice::FlipScreen()
 
     // Clear the screen. This is needed to keep the
     // pillarboxes in fullscreen from displaying garbage data.
+
+	// this causes the game to slow down when starting and crash the special stages at 30fps.
+	// this only serves to clear the screen if you modify the window size or something similar
+#if RETRO_PLATFORM != RETRO_PS3
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
     SDL_RenderClear(renderer);
+#endif
 
 #if (SDL_COMPILEDVERSION >= SDL_VERSIONNUM(2, 0, 18))
     int32 startVert = 0;
